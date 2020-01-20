@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');x
+  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
   * {
     margin: 0;
     padding: 0;
@@ -13,7 +13,6 @@ export default createGlobalStyle`
   }
   html, body, #root {
     height: 100%;
-    background-color: #f8f8f8;
   }
   body {
     -webkit-font-smoothing: antialiased;

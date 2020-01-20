@@ -2,21 +2,30 @@ import React, { useState } from 'react';
 
 import { Form, Input } from '@rocketseat/unform';
 
-import { Container, LogoContainer } from './styles';
+import { FaSearch } from 'react-icons/fa';
 
-import Logo from '../../assets/GitHub_Logo.png';
+import { Container, LogoContainer, FormContainer, Content } from './styles';
+
+import Logo from '../../assets/GitHub_Logo_NEW.png';
 
 export default function Search() {
   return (
     <Container>
-      <LogoContainer>
-        <img src={Logo} alt="Github" />
-        <span>Search</span>
-      </LogoContainer>
+      <Content>
+        <LogoContainer>
+          <img src={Logo} alt="Github" />
+          <span>Search</span>
+        </LogoContainer>
 
-      <Form>
-        <Input name="username" placeholder="Type the username..." />
-      </Form>
+        <FormContainer>
+          <Form>
+            <Input name="username" placeholder="Type the username..." />
+            <button type="submit">
+              <FaSearch size={18} color="#FFF" />
+            </button>
+          </Form>
+        </FormContainer>
+      </Content>
     </Container>
   );
 }
