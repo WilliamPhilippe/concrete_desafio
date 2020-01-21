@@ -9,6 +9,8 @@ import { Container, LogoContainer, FormContainer, Content } from './styles';
 import Logo from '../../assets/GitHub_Logo_NEW.png';
 
 export default function Search() {
+  function handleSarch() {}
+
   return (
     <Container>
       <Content>
@@ -18,7 +20,7 @@ export default function Search() {
         </LogoContainer>
 
         <FormContainer>
-          <Form>
+          <Form onSubmit={handleSarch}>
             <Input name="username" placeholder="Type the username..." />
             <button type="submit">
               <FaSearch size={18} color="#FFF" />
