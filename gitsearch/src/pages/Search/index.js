@@ -1,15 +1,36 @@
 import React, { useState } from 'react';
 
-import { Form, Input } from '@rocketseat/unform';
+import api from '../../services/api';
 
-import { FaSearch } from 'react-icons/fa';
+import Form from '../../components/Search';
 
-import { Container, LogoContainer, FormContainer, Content } from './styles';
+import { Container, LogoContainer, Content, Error } from './styles';
 
 import Logo from '../../assets/GitHub_Logo_NEW.png';
 
-export default function Search() {
-  function handleSarch() {}
+export default function Search({ history }) {
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleSarch(username) {
+    setError('');
+    if (!username) return;
+
+    setLoading(true);
+
+    try {
+      await api.get(`https://api.github.com/users/${username}`);
+
+      history.push(`/profile/${username}`);
+    } catch (err) {
+      const { status } = err.response;
+
+      if (status === 404) setError('User not found.');
+      else setError('Connection error.');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Container>
@@ -19,14 +40,12 @@ export default function Search() {
           <span>Search</span>
         </LogoContainer>
 
-        <FormContainer>
-          <Form onSubmit={handleSarch}>
-            <Input name="username" placeholder="Type the username..." />
-            <button type="submit">
-              <FaSearch size={18} color="#FFF" />
-            </button>
-          </Form>
-        </FormContainer>
+        <Form
+          handleSarch={handleSarch}
+          placeholder="Type the username..."
+          loading={loading}
+        />
+        {error && <Error>{error}</Error>}
       </Content>
     </Container>
   );
