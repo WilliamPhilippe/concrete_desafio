@@ -9,9 +9,20 @@ import { FaSearch } from 'react-icons/fa';
 import { FormContainer, Button } from './styles';
 
 export default function Search({ handleSearch, set, placeholder, loading }) {
+  /**
+   * Caso o component receba o 'set', então ele altera o estado do componente pai,
+   * caso não, então ele retorna a função handleSearch do componente pai.
+   * @param {String} field
+   */
   function handleclick({ field }) {
     set ? set(field) : handleSearch(field);
   }
+
+  /**
+   * Para um retorno em tempo real,
+   * a cada mudança do input, o estado é alterado
+   * @param {string} field
+   */
 
   function handleChange(field) {
     if (set) set(field);

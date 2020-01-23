@@ -63,6 +63,10 @@ export default function Profile({ match, history }) {
     loadRepos();
   }, [history, user]);
 
+  /**
+   * Função responsável por comparar a filtragem dos repositórios.
+   * @param {object} item
+   */
   function searchFilter(item) {
     return item.name.toLowerCase().includes(searchValue) || !searchValue;
   }
