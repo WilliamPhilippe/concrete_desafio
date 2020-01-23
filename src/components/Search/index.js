@@ -49,10 +49,11 @@ Search.propTypes = {
   handleSearch: PropTypes.func,
   set: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
 };
 
 Search.defaultProps = {
   handleSearch: null,
   set: null,
+  loading: false,
 };

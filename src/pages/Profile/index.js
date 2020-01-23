@@ -124,7 +124,7 @@ export default function Profile({ match, history }) {
               placeholder="Search a repository..."
             />
             {repos.filter(searchFilter).map(item => (
-              <Repository>
+              <Repository key={item.name}>
                 <p>
                   <a href={item.html_url}>{item.name}</a>
                 </p>
