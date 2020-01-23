@@ -43,7 +43,7 @@ export default function Search({ history }) {
         </LogoContainer>
 
         <Form
-          handleSarch={handleSarch}
+          handleSearch={handleSarch}
           placeholder="Type the username..."
           loading={loading}
         />
