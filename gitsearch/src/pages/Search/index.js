@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 import api from '../../services/api';
 
 import Form from '../../components/Search';
@@ -50,3 +52,9 @@ export default function Search({ history }) {
     </Container>
   );
 }
+
+Search.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};

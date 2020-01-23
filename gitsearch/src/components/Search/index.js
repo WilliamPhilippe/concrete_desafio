@@ -1,20 +1,16 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import { Form, Input } from '@rocketseat/unform';
 
 import { FaSearch } from 'react-icons/fa';
 
 import { FormContainer, Button } from './styles';
 
-export default function Search({
-  handleSarch,
-  value,
-  set,
-  placeholder,
-  loading,
-}) {
+export default function Search({ handleSearch, set, placeholder, loading }) {
   function handleclick({ field }) {
-    set ? set(field) : handleSarch(field);
+    set ? set(field) : handleSearch(field);
   }
 
   function handleChange(field) {
@@ -37,3 +33,15 @@ export default function Search({
     </FormContainer>
   );
 }
+
+Search.propTypes = {
+  handleSearch: PropTypes.func,
+  set: PropTypes.func,
+  placeholder: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
+
+Search.defaultProps = {
+  handleSearch: null,
+  set: null,
+};

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
 import {
   MdStarBorder,
   MdEventSeat,
@@ -13,6 +15,8 @@ import {
 import { FaCodepen } from 'react-icons/fa';
 
 import api from '../../services/api';
+
+import { compare } from '../../utils/compare';
 
 import Form from '../../components/Search';
 
@@ -30,8 +34,6 @@ import {
   Back,
 } from './styles';
 
-import AvatarSrc from '../../assets/avatar.jpg';
-
 export default function Profile({ match, history }) {
   const { user } = match.params;
 
@@ -47,18 +49,19 @@ export default function Profile({ match, history }) {
       try {
         const response = await api.get(`/users/${user}/repos`);
 
-        setRepos(response.data);
+        setRepos(response.data.sort(compare));
 
         const detailsResponse = await api.get(`/users/${user}`);
         setDetails(detailsResponse.data);
-      } catch (err) {}
+      } catch (err) {
+        history.push('/');
+      }
 
       setLoading(false);
     }
 
     loadRepos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [history, user]);
 
   function searchFilter(item) {
     return item.name.toLowerCase().includes(searchValue) || !searchValue;
@@ -134,3 +137,14 @@ export default function Profile({ match, history }) {
     </Container>
   );
 }
+
+Profile.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      user: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
